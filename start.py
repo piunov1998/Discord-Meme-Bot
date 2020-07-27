@@ -9,6 +9,7 @@ meme_list = {}
 meme_folder = './img/'
 with open('quotes.json', encoding='utf-8') as q:
     quotes = json.load(q)
+print(f'Quotes library loaded. ({len(quotes)} qoutes)')
 
 def create():
     meme_list.clear()
@@ -87,4 +88,5 @@ async def quote(ctx, *id):
     await ctx.message.channel.send(f'**{string}**')
 
 create()
+print(f'Memes library loaded. ({len(meme_list)} memes)')
 client.run(token)
