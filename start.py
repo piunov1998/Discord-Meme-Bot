@@ -1,8 +1,10 @@
 import discord, json, os
 from discord.ext import commands
 
-token = 'NzM2NTkwODIyMDczNjk2MjY2.XxxBqQ.1ENjoBJNGaeM9NLJjXbrw3T8G10'
-client = commands.Bot(command_prefix = '$')
+with open('Data.json', encoding = 'utf-8') as dataFile:
+    data = json.load(dataFile)
+    token = data['token']
+    client = commands.Bot(command_prefix = tuple(data['prefix']))
 meme_list = {}
 meme_folder = './img/'
 with open('quotes.json', encoding='utf-8') as q:
