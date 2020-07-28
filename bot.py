@@ -14,14 +14,14 @@ print(f'Quotes library loaded. ({len(quotes)} qoutes)')
 def create():
     meme_list.clear()
     for filename in os.listdir(meme_folder):
-        (name, ext) = os.path.splitext(filename)
-        meme_list[name] = meme_folder + name + ext
+        name = os.path.splitext(filename)[0]
+        meme_list[name] = meme_folder + filename
 
 @client.event
 async def on_ready():
     print('Ready.')
 
-@client.command()
+@client.command(brief = 'Shows meme list')
 async def memes(ctx):
     create()
     string = ''
@@ -31,7 +31,7 @@ async def memes(ctx):
         string += f'{i}. {name}\n'
     await ctx.message.channel.send(f'```{string}```')
 
-@client.command()
+@client.command(brief = 'Saves ur meme')
 async def save(ctx, *name):
     meme_name = ''
     for word in name:
@@ -46,7 +46,7 @@ async def save(ctx, *name):
     create()
     await ctx.message.channel.send(f'```Meme saved as {meme_name}```')
 
-@client.command()
+@client.command(brief = 'Saves ur quote')
 async def savequote(ctx, quote_name, author, *quote_words):
     text = ''
     for word in quote_words:
@@ -62,9 +62,7 @@ async def savequote(ctx, quote_name, author, *quote_words):
     string = f'```Quote has been saved:\nName: {quote_name}\nAuthor: {author}```'
     await ctx.message.channel.send(string)
 
-
-
-@client.command(brief = 'shows chosen meme')
+@client.command(brief = 'Shows chosen meme')
 async def meme(ctx, *meme):
     meme_name = ''
     for word in meme:
