@@ -90,6 +90,9 @@ async def quote(ctx, *id):
 async def on_command_error(ctx, error):
     if isinstance(error, commands.CommandNotFound):
         await ctx.send(f'**{ctx.message.content}** command not found. Use {prefix}help')
+    else:
+        await ctx.send('Smth went **wrong**..')
+        print(error)
 
 create()
 print(f'Memes library loaded. ({len(meme_list)} memes)')
