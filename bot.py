@@ -30,7 +30,7 @@ async def memes(ctx):
     for name in meme_list.keys():
         i += 1
         string += f'{i}. {name}\n'
-    await ctx.message.channel.send(f'```{string}```')
+    await ctx.send(f'```{string}```')
 
 @client.command(brief = 'Saves ur meme')
 async def save(ctx, *name):
@@ -45,7 +45,7 @@ async def save(ctx, *name):
     meme_ext = os.path.splitext(original_name)[1]
     os.rename(original_path, os.path.join(meme_folder, meme_name + meme_ext))
     create()
-    await ctx.message.channel.send(f'```Meme saved as {meme_name}```')
+    await ctx.send(f'```Meme saved as {meme_name}```')
 
 @client.command(brief = 'Saves ur quote')
 async def savequote(ctx, quote_name, author, *quote_words):
@@ -61,7 +61,7 @@ async def savequote(ctx, quote_name, author, *quote_words):
     with open('quotes.json', 'w', encoding='utf-8') as f:
         json.dump(quotes, f, sort_keys=True, indent=2)
     string = f'```Quote has been saved:\nName: {quote_name}\nAuthor: {author}```'
-    await ctx.message.channel.send(string)
+    await ctx.send(string)
 
 @client.command(brief = 'Shows chosen meme')
 async def meme(ctx, *meme):
@@ -72,7 +72,7 @@ async def meme(ctx, *meme):
     picture_path = meme_list[meme_name]
     with open(picture_path, 'rb') as picture:
         file = discord.File(picture)
-        await ctx.message.channel.send(file = file)
+        await ctx.send(file = file)
 
 @client.command(brief = 'Shows chosen quote')
 async def quote(ctx, *id):
@@ -84,7 +84,7 @@ async def quote(ctx, *id):
     text = quote['text']
     author = quote['author']
     string = f'{text}\n©{author}'
-    await ctx.message.channel.send(f'**{string}**')
+    await ctx.send(f'**{string}**')
 
 @client.event
 async def on_command_error(ctx, error):
