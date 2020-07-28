@@ -4,6 +4,7 @@ from discord.ext import commands
 with open('Data.json', encoding = 'utf-8') as dataFile:
     data = json.load(dataFile)
     token = data['token']
+    prefix = tuple(data['prefix'])[0]
     client = commands.Bot(command_prefix = tuple(data['prefix']))
 meme_list = {}
 meme_folder = './img/'
@@ -84,6 +85,11 @@ async def quote(ctx, *id):
     author = quote['author']
     string = f'{text}\n©{author}'
     await ctx.message.channel.send(f'**{string}**')
+
+@client.event
+async def on_command_error(ctx, error):
+    if isinstance(error, commands.CommandNotFound):
+        await ctx.send(f'**{ctx.message.content}** command not found. Use {prefix}help')
 
 create()
 print(f'Memes library loaded. ({len(meme_list)} memes)')
