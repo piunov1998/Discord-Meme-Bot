@@ -22,8 +22,8 @@ def create():
 async def on_ready():
     print('Ready.')
 
-@client.command(brief = 'Shows meme list')
-async def memes(ctx):
+@client.command(name = "meme list", brief = 'Shows a list of available memes')
+async def mlist(ctx):
     create()
     string = ''
     i = 0
@@ -32,8 +32,8 @@ async def memes(ctx):
         string += f'{i}. {name}\n'
     await ctx.send(f'```{string}```')
 
-@client.command(brief = 'Saves ur meme')
-async def save(ctx, *name):
+@client.command(name = "meme save", brief = 'Saves a meme of your choice on the server')
+async def msave(ctx, *name):
     meme_name = ''
     for word in name:
         meme_name += f'{word} '
@@ -47,8 +47,8 @@ async def save(ctx, *name):
     create()
     await ctx.send(f'```Meme saved as {meme_name}```')
 
-@client.command(brief = 'Saves ur quote')
-async def savequote(ctx, quote_name, author, *quote_words):
+@client.command(name = "quote save", brief = 'Saves ur quote')
+async def qsave(ctx, quote_name, author, *quote_words):
     text = ''
     for word in quote_words:
         text += f'{word} '
@@ -63,7 +63,7 @@ async def savequote(ctx, quote_name, author, *quote_words):
     string = f'```Quote has been saved:\nName: {quote_name}\nAuthor: {author}```'
     await ctx.send(string)
 
-@client.command(brief = 'Shows chosen meme')
+@client.command(name = "meme show", brief = 'Display selected meme in current chat')
 async def meme(ctx, *meme):
     meme_name = ''
     for word in meme:
@@ -74,7 +74,7 @@ async def meme(ctx, *meme):
         file = discord.File(picture)
         await ctx.send(file = file)
 
-@client.command(brief = 'Shows chosen quote')
+@client.command(name = "quote show", brief = 'Shows chosen quote')
 async def quote(ctx, *id):
     quote_id = ''
     for word in id:
