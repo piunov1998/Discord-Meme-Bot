@@ -74,7 +74,7 @@ async def meme(ctx, *meme):
         file = discord.File(picture)
         await ctx.send(file = file)
 
-@client.command(name = "quote show", brief = 'Shows chosen quote')
+@client.command(name = "quote show", brief = 'Print selected quote in current chat')
 async def quote(ctx, *id):
     quote_id = ''
     for word in id:
@@ -91,7 +91,7 @@ async def on_command_error(ctx, error):
     if isinstance(error, commands.CommandNotFound):
         await ctx.send(f'**{ctx.message.content}** command not found. Use {prefix}help')
     else:
-        await ctx.send('Smth went **wrong**..')
+        await ctx.send('Something went **wrong**...')
         print(error)
 
 create()
